@@ -59,4 +59,20 @@ router.put('/country', async (req, res) => {
     }
 })
 
+router.delete('/country', async (req, res) => {
+    if (req.body.id) {
+        const snapshot = await collection.doc(req.body.id).get();
+
+        if (snapshot.exists) {
+            await collection.doc(req.body.id).delete();
+
+            res.sendStatus(202);
+        } else {
+            res.sendStatus(403);
+        }
+    } else {
+        res.sendStatus(400);
+    }
+})
+
 module.exports = router;
