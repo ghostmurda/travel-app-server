@@ -26,12 +26,18 @@ router.post('/country', async (req, res) => {
     const collection = db.collection('countries');
 
     if (req.body.id && req.body.capital && req.body.desc) {
-        await collection.doc(req.body.id).set({
-            capital: req.body.capital,
-            desc: req.body.desc
-        })
+        const snapshot = await collection.doc(req.body.id).get();
 
-        res.sendStatus(202);
+        if (!snapshot.exists) {
+            await collection.doc(req.body.id).set({
+                capital: req.body.capital,
+                desc: req.body.desc
+            })
+
+            res.sendStatus(202);
+        } else {
+            res.sendStatus(403);
+        }
     } else {
         res.sendStatus(400);
     }
