@@ -6,9 +6,20 @@ const db = admin.firestore();
 
 router.get('/country', async (req, res) => {
     const collection = db.collection('countries');
-    const doc = await collection.doc(req.query.id).get();
 
-    res.send(doc.data());
+    if (req.query.id) {
+        const doc = await collection.doc(req.query.id).get();
+
+        if (doc.data()) {
+            res.send(doc.data());
+        } else {
+            res.sendStatus(404);
+        }
+    } else {
+        const snapshot = await collection.get();
+
+        res.send(snapshot.docs.map(doc => doc.data()));
+    }
 })
 
 module.exports = router;
