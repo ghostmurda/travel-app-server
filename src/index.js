@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const admin = require("firebase-admin");
-const serviceAccount = require("./src/config/travel-app-808de-firebase-adminsdk-13ojd-0a10d18057.json");
+const serviceAccount = require("./config/travel-app-808de-firebase-adminsdk-13ojd-0a10d18057.json");
 
 const PORT = process.env.PORT || 8080;
 const server = express();
@@ -19,7 +19,7 @@ const main = () => {
             credential: admin.credential.cert(serviceAccount)
         });
 
-        server.use('/api', require('./src/controller/countries'));
+        server.use('/api', require('./controller/countries'));
 
         server.listen(PORT, () => {
             console.log("Server started at port: " + PORT);
