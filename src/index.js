@@ -19,7 +19,8 @@ const main = () => {
             credential: admin.credential.cert(serviceAccount)
         });
 
-        server.use('/api', require('./controller/countryController'));
+        server.use('/country', require('./controller/countryController'));
+        server.use('/media', require('./controller/mediaController'));
 
         server.listen(PORT, () => {
             console.log("Server started at port: " + PORT);

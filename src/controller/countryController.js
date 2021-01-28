@@ -5,7 +5,7 @@ const router = express.Router();
 const db = admin.firestore();
 const collection = db.collection('countries');
 
-router.get('/country', async (req, res) => {
+router.get('/', async (req, res) => {
     if (req.query.id) {
         const doc = await collection.doc(req.query.id).get();
 
@@ -21,7 +21,7 @@ router.get('/country', async (req, res) => {
     }
 })
 
-router.post('/country', async (req, res) => {
+router.post('/', async (req, res) => {
     if (req.body.id && req.body.capital && req.body.desc && req.body.avatar) {
         const snapshot = await collection.doc(req.body.id).get();
 
@@ -41,7 +41,7 @@ router.post('/country', async (req, res) => {
     }
 })
 
-router.put('/country', async (req, res) => {
+router.put('/', async (req, res) => {
     if (req.body.id) {
         const snapshot = await collection.doc(req.body.id).get();
 
@@ -61,7 +61,7 @@ router.put('/country', async (req, res) => {
     }
 })
 
-router.delete('/country', async (req, res) => {
+router.delete('/', async (req, res) => {
     if (req.body.id) {
         const snapshot = await collection.doc(req.body.id).get();
 
