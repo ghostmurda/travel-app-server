@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const admin = require("firebase-admin");
 const serviceAccount = require("./config/travel-app-808de-firebase-adminsdk-13ojd-0a10d18057.json");
+const authMiddleware = require("./middlewares/authMiddleware");
 
 const PORT = process.env.PORT || 8080;
 const server = express();
@@ -19,6 +20,7 @@ const main = () => {
             credential: admin.credential.cert(serviceAccount)
         });
 
+        server.use('/', authMiddleware);
         server.use('/country', require('./controller/countryController'));
         server.use('/media', require('./controller/mediaController'));
 
