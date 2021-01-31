@@ -29,7 +29,8 @@ router.post('/', async (req, res) => {
             await collection.doc(req.body.id).set({
                 capital: req.body.capital,
                 desc: req.body.desc,
-                avatar: req.body.avatar
+                avatar: req.body.avatar,
+                name: req.body.id
             })
 
             res.sendStatus(202);
@@ -49,7 +50,8 @@ router.put('/', async (req, res) => {
             await collection.doc(req.body.id).set({
                 capital: req.body.capital ? req.body.capital : snapshot.data().capital,
                 desc: req.body.desc ? req.body.desc : snapshot.data().desc,
-                avatar: req.body.avatar ? req.body.avatar : snapshot.data().avatar
+                avatar: req.body.avatar ? req.body.avatar : snapshot.data().avatar,
+                name: req.body.id
             })
 
             res.sendStatus(202);
