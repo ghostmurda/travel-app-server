@@ -20,7 +20,7 @@ const main = () => {
             credential: admin.credential.cert(serviceAccount)
         });
 
-        server.use('/', authMiddleware);
+        server.use('/media', authMiddleware);
         server.use('/country', require('./controller/countryController'));
         server.use('/media', require('./controller/mediaController'));
 
